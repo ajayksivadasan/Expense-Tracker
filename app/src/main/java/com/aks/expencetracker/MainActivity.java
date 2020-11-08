@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     String rate;
     Context context;
     ArrayList<String> spinnerArray = new ArrayList<>();
+
     //comments added
     @Override
     protected void onCreate(Bundle savedInstanceState) {

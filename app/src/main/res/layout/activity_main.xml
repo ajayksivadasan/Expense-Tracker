@@ -3,22 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    android:background="#DDDDDD"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
-<Spinner
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="start"
-    android:id="@+id/spEntryType"/>
+
+    <Spinner
+        android:id="@+id/spEntryType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start" />
+
     <Button
         android:id="@+id/btPreviousEntries"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|top"
-        android:gravity="center|top"
+        android:layout_gravity="end"
+        android:layout_margin="10dp"
+        android:background="@drawable/button_background_homepage"
         android:text="@string/previous_entries" />
 
     <EditText
@@ -26,9 +27,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:background="@drawable/edit_text_background"
         android:fontFamily="@font/my_raid_pro_regular"
         android:hint="@string/reason"
         android:inputType="text"
+        android:padding="10dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         tools:ignore="Autofill" />
@@ -37,7 +40,9 @@
         android:id="@+id/etItemRate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:layout_margin="10dp"
+        android:background="@drawable/edit_text_background"
         android:fontFamily="@font/my_raid_pro_regular"
         android:hint="@string/rate"
         android:inputType="numberDecimal"
@@ -49,6 +54,7 @@
         android:id="@+id/btSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_background_homepage"
         android:layout_margin="10dp"
         android:text="@string/txt_submit" />
 </LinearLayout>
