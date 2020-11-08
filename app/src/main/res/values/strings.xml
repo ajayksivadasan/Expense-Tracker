@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Expence Tracker</string>
+    <string name="rate">Rate</string>
+    <string name="txt_submit">submit</string>
+    <string name="txt_date">Date</string>
+    <string name="txt_reason">Reason</string>
+    <string name="txt_expense">Expense</string>
+    <string name="txt_sl_no">Sl No:</string>
+    <string name="txt_total">Total:</string>
+    <string name="previous_entries">Previous entries</string>
+    <string name="reason">Reason</string>
+    <string name="txt_income">Income</string>
+</resources>
