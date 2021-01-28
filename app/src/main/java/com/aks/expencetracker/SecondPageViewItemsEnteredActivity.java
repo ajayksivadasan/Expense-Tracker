@@ -24,6 +24,7 @@ public class SecondPageViewItemsEnteredActivity extends AppCompatActivity {
     RecyclerView rvSecondPage;
     ExpenseViewAdapter expenseViewAdapter;
 
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

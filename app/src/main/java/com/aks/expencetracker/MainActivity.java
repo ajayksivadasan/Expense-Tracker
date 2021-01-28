@@ -22,15 +22,14 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText etItemType;
-    private EditText etItemRate;
-    private Button btSubmit;
-    private Button btPreviousEntries;
-    private Spinner spEntryType;
     String type;
     String rate;
     Context context;
     ArrayList<String> spinnerArray = new ArrayList<>();
+    private EditText etItemType;
+    private EditText etItemRate;
+    private Button btSubmit;
+    private Button btPreviousEntries;
 
     //comments added
     @Override
@@ -43,15 +42,10 @@ public class MainActivity extends AppCompatActivity {
         spinnerArray.add("Income");
         spinnerArray.add("Expense");
         ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item);
-        spEntryType.setAdapter(stringArrayAdapter);
         btSubmit.setOnClickListener(v -> {
             type = etItemType.getText().toString();
             rate = etItemRate.getText().toString();
-            if (spEntryType.getSelectedItemId() != 0 && type != null && !type.equals("") && rate != null && !rate.equals("")) {
-                saveData(type, rate, spEntryType.getSelectedItem().toString());
-            } else {
-                Toast.makeText(context, "Fill All Fields", Toast.LENGTH_SHORT).show();
-            }
+            saveData(type,rate);
         });
         btPreviousEntries.setOnClickListener(v -> {
             Intent intent = new Intent(context, SecondPageViewItemsEnteredActivity.class);
@@ -59,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void saveData(String type, String rate, String selectedItem) {
+    private void saveData(String type, String rate) {
         ArrayList<ExpenseModel> expenseModels = new ArrayList<>();
         ExpenseModel expenseModel = new ExpenseModel();
         Date date = Calendar.getInstance().getTime();
@@ -70,13 +64,8 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (selectedItem.equals("Income")) {
-            expenseModel.setExpense(0.00f);
-            expenseModel.setIncome(Float.parseFloat(rate));
-        } else {
-            expenseModel.setExpense(Float.parseFloat(rate));
-            expenseModel.setIncome(0.00f);
-        }
+        expenseModel.setExpense(Float.parseFloat(rate));
+        expenseModel.setIncome(0.00f);
         expenseModel.setReason(type);
         expenseModels.add(expenseModel);
         DatabaseConnection dbCon = new DatabaseConnection(this);
@@ -97,6 +86,5 @@ public class MainActivity extends AppCompatActivity {
         etItemRate = findViewById(R.id.etItemRate);
         etItemType = findViewById(R.id.etItemType);
         btSubmit = findViewById(R.id.btSubmit);
-        spEntryType = findViewById(R.id.spEntryType);
     }
 }

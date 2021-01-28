@@ -1,6 +1,7 @@
 package com.aks.expencetracker.models;
 
 public class ExpenseModel {
+    private int primaryKey;
     private String date;
     private String reason;
     private Float expense;
@@ -39,5 +40,13 @@ public class ExpenseModel {
 
     public void setIncome(float income) {
         this.income = income;
+    }
+
+    public int getPrimaryKey() {
+        return primaryKey;
+    }
+
+    public void setPrimaryKey(int primaryKey) {
+        this.primaryKey = primaryKey;
     }
 }

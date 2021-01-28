@@ -48,7 +48,8 @@
             android:text="@string/txt_income"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="0dp"

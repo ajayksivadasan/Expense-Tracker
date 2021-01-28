@@ -22,7 +22,7 @@ public class DatabaseConnection extends SQLiteOpenHelper {
     private static final String REASON = "REASON";
     private static final String EXPENSE = "EXPENSE";
     private static final String INCOME = "INCOME";
-    private static final String CREATE_TABLE_EXPENSE = "CREATE TABLE " + EXPENSE_TABLE + "(" + SL_NO + " INTEGER PRIMARY KEY AUTOINCREMENT," + DATE + " TEXT," + REASON + " TEXT, " + EXPENSE + " TEXT," + INCOME + " TEXT)";
+    private static final String CREATE_TABLE_EXPENSE = "CREATE TABLE " + EXPENSE_TABLE + "(" + SL_NO + " INTEGER PRIMARY KEY AUTOINCREMENT," + DATE + " TEXT," + REASON + " TEXT, " + EXPENSE + " TEXT)";
     private static final String DROP_TABLE_EXPENSE = "DROP TABLE IF EXISTS " + EXPENSE_TABLE;
     private static final String SELECT_STAR_FROM_EXPENSE_TABLE = "SELECT * FROM " + EXPENSE_TABLE;
     Cursor cursor;
@@ -52,15 +52,20 @@ public class DatabaseConnection extends SQLiteOpenHelper {
                 cursor = sqLiteDatabase.rawQuery(SELECT_STAR_FROM_EXPENSE_TABLE, null);
                 sqLiteDatabase = this.getWritableDatabase();
                 if (!cursor.moveToFirst()) {
-                    sqLiteDatabase.execSQL("INSERT INTO " + EXPENSE_TABLE + " VALUES (1,'" + expenseModels1.getDate() + "','" + expenseModels1.getReason() + "'," + expenseModels1.getExpense() + "," + expenseModels1.getIncome() + " )");
+                    sqLiteDatabase.execSQL("INSERT INTO " + EXPENSE_TABLE + " VALUES (1,'" + expenseModels1.getDate() + "','" + expenseModels1.getReason() + "'," + expenseModels1.getExpense() + ")");
                 } else {
-                    sqLiteDatabase.execSQL("INSERT INTO " + EXPENSE_TABLE + "(" + DATE + "," + REASON + "," + EXPENSE + "," + INCOME + ") VALUES ('" + expenseModels1.getDate() + "','" + expenseModels1.getReason() + "'," + expenseModels1.getExpense() + "," + expenseModels1.getIncome() + ")");
+                    sqLiteDatabase.execSQL("INSERT INTO " + EXPENSE_TABLE + "(" + DATE + "," + REASON + "," + EXPENSE + ") VALUES ('" + expenseModels1.getDate() + "','" + expenseModels1.getReason() + "'," + expenseModels1.getExpense() + ")");
                 }
             }
             return true;
         } else {
             return false;
         }
+    }
+
+    public void deleteFromExpense(int slNo) {
+        sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.execSQL("delete from "+EXPENSE_TABLE+" where "+SL_NO+"="+slNo);
     }
 
     public List<ExpenseModel> getDataFromExpenseTable() {
@@ -75,11 +80,12 @@ public class DatabaseConnection extends SQLiteOpenHelper {
                 do {
                     expenseModel = new ExpenseModel();
                     try {
+                        expenseModel.setPrimaryKey(cursor.getInt(cursor.getColumnIndex(SL_NO)));
                         expenseModel.setDate(cursor.getString(cursor.getColumnIndex(DATE)));
                         Log.e("getDataFromExpense: ", cursor.getString(cursor.getColumnIndex(DATE)));
                         expenseModel.setReason(cursor.getString(cursor.getColumnIndex(REASON)));
                         expenseModel.setExpense(cursor.getFloat(cursor.getColumnIndex(EXPENSE)));
-                        expenseModel.setIncome(cursor.getFloat(cursor.getColumnIndex(INCOME)));
+//                        expenseModel.setIncome(cursor.getFloat(cursor.getColumnIndex(INCOME)));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
