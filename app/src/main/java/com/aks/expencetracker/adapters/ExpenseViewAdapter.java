@@ -21,9 +21,9 @@ import com.aks.expencetracker.models.ExpenseModel;
 import java.util.List;
 
 public class ExpenseViewAdapter extends RecyclerView.Adapter<ExpenseViewAdapter.ExpenseViewAdapterViewHolder> {
-    Context context;
-    List<ExpenseModel> expenseModels;
-    DatabaseConnection databaseConnection;
+    final Context context;
+    final List<ExpenseModel> expenseModels;
+    final DatabaseConnection databaseConnection;
 
     public ExpenseViewAdapter(Context context, List<ExpenseModel> expenseModels) {
         this.context = context;
@@ -63,13 +63,13 @@ public class ExpenseViewAdapter extends RecyclerView.Adapter<ExpenseViewAdapter.
         return expenseModels.size();
     }
 
-    public class ExpenseViewAdapterViewHolder extends RecyclerView.ViewHolder {
-        TextView tvSlNo;
-        TextView tvDate;
-        TextView tvReason;
-        TextView tvIncome;
-        TextView tvExpense;
-        LinearLayout llLongPressDel;
+    public static class ExpenseViewAdapterViewHolder extends RecyclerView.ViewHolder {
+        final TextView tvSlNo;
+        final TextView tvDate;
+        final TextView tvReason;
+        final TextView tvIncome;
+        final TextView tvExpense;
+        final LinearLayout llLongPressDel;
 
         public ExpenseViewAdapterViewHolder(@NonNull View itemView) {
             super(itemView);

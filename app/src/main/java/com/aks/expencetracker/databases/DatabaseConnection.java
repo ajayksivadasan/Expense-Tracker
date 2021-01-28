@@ -21,7 +21,6 @@ public class DatabaseConnection extends SQLiteOpenHelper {
     private static final String DATE = "DATE";
     private static final String REASON = "REASON";
     private static final String EXPENSE = "EXPENSE";
-    private static final String INCOME = "INCOME";
     private static final String CREATE_TABLE_EXPENSE = "CREATE TABLE " + EXPENSE_TABLE + "(" + SL_NO + " INTEGER PRIMARY KEY AUTOINCREMENT," + DATE + " TEXT," + REASON + " TEXT, " + EXPENSE + " TEXT)";
     private static final String DROP_TABLE_EXPENSE = "DROP TABLE IF EXISTS " + EXPENSE_TABLE;
     private static final String SELECT_STAR_FROM_EXPENSE_TABLE = "SELECT * FROM " + EXPENSE_TABLE;
@@ -74,7 +73,7 @@ public class DatabaseConnection extends SQLiteOpenHelper {
         ExpenseModel expenseModel;
         sqLiteDatabase = this.getReadableDatabase();
         cursor = sqLiteDatabase.rawQuery(SELECT_STAR_FROM_EXPENSE_TABLE, null);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyy/MM/dd", Locale.getDefault());
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyyy/MM/dd", Locale.getDefault());
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {

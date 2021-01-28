@@ -7,7 +7,6 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     String type;
     String rate;
     Context context;
-    ArrayList<String> spinnerArray = new ArrayList<>();
+    final ArrayList<String> spinnerArray = new ArrayList<>();
     private EditText etItemType;
     private EditText etItemRate;
     private Button btSubmit;
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         spinnerArray.add("--Select Type Of Entry--");
         spinnerArray.add("Income");
         spinnerArray.add("Expense");
-        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item);
+//        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item);
         btSubmit.setOnClickListener(v -> {
             type = etItemType.getText().toString();
             rate = etItemRate.getText().toString();
