@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aks.expencetracker.R;
@@ -42,6 +43,9 @@ public class ExpenseViewAdapter extends RecyclerView.Adapter<ExpenseViewAdapter.
     @Override
     public void onBindViewHolder(@NonNull ExpenseViewAdapterViewHolder holder, int position) {
         holder.tvReason.setText(expenseModels.get(position).getReason());
+        if(expenseModels.get(position).getExpense()<0){
+            holder.tvExpense.setTextColor(ContextCompat.getColor(context,R.color.red));
+        }
         holder.tvExpense.setText(expenseModels.get(position).getExpense() + " Rs");
         holder.tvIncome.setText(expenseModels.get(position).getIncome() + " Rs");
         holder.tvDate.setText(expenseModels.get(position).getDate());
