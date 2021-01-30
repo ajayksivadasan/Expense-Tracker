@@ -47,7 +47,7 @@
         android:background="@drawable/edit_text_background"
         android:fontFamily="@font/my_raid_pro_regular"
         android:hint="@string/rate"
-        android:inputType="numberDecimal"
+        android:inputType="numberSigned|numberDecimal"
         android:padding="10dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
