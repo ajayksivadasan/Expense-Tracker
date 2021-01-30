@@ -9,7 +9,7 @@
         android:id="@+id/tvSlNo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight=".7"
         android:fontFamily="@font/my_raid_pro_regular"
         android:text="@string/txt_sl_no"
         android:textColor="@color/black"
@@ -40,7 +40,6 @@
 
     <TextView
         android:id="@+id/tvIncome"
-        android:visibility="gone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

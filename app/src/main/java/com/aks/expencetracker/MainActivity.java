@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,15 +21,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+@SuppressWarnings("rawtypes")
 public class MainActivity extends AppCompatActivity {
+    final ArrayList<String> spinnerArray = new ArrayList<>();
     String type;
     String rate;
     Context context;
-    final ArrayList<String> spinnerArray = new ArrayList<>();
     private EditText etItemType;
     private EditText etItemRate;
     private Button btSubmit;
     private Button btPreviousEntries;
+    private Spinner spEntryType;
 
     //comments added
     @Override
@@ -40,11 +43,12 @@ public class MainActivity extends AppCompatActivity {
         spinnerArray.add("--Select Type Of Entry--");
         spinnerArray.add("Income");
         spinnerArray.add("Expense");
-//        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item,spinnerArray);
+        spEntryType.setAdapter(arrayAdapter);
         btSubmit.setOnClickListener(v -> {
             type = etItemType.getText().toString();
             rate = etItemRate.getText().toString();
-            saveData(type,rate);
+            saveData(type, rate);
         });
         btPreviousEntries.setOnClickListener(v -> {
             Intent intent = new Intent(context, SecondPageViewItemsEnteredActivity.class);
@@ -85,5 +89,6 @@ public class MainActivity extends AppCompatActivity {
         etItemRate = findViewById(R.id.etItemRate);
         etItemType = findViewById(R.id.etItemType);
         btSubmit = findViewById(R.id.btSubmit);
+        spEntryType = findViewById(R.id.spEntryType);
     }
 }
