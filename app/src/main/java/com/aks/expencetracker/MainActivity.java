@@ -21,7 +21,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-@SuppressWarnings("rawtypes")
 public class MainActivity extends AppCompatActivity {
     final ArrayList<String> spinnerArray = new ArrayList<>();
     String type;
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         spinnerArray.add("--Select Type Of Entry--");
         spinnerArray.add("Income");
         spinnerArray.add("Expense");
-        ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item,spinnerArray);
+        ArrayAdapter<? extends String> arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item,spinnerArray);
         spEntryType.setAdapter(arrayAdapter);
         btSubmit.setOnClickListener(v -> {
             type = etItemType.getText().toString();
@@ -67,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        expenseModel.setExpense(Float.parseFloat(rate));
+        expenseModel.setExpense(Double.parseDouble(rate));
         expenseModel.setIncome(0.00f);
         expenseModel.setReason(type);
         expenseModels.add(expenseModel);
@@ -82,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(context, "Something Error Occurred", Toast.LENGTH_SHORT).show();
         }
+        dbCon.close();
     }
 
     private void initIds() {

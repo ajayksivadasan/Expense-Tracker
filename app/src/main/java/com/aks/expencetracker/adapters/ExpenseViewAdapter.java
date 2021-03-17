@@ -63,11 +63,15 @@ public class ExpenseViewAdapter extends RecyclerView.Adapter<ExpenseViewAdapter.
         holder.tvDate.setText(expenseModels.get(position).getDate());
         holder.tvSlNo.setText(String.valueOf(position + 1));
         holder.llLongPressDel.setOnLongClickListener(v -> {
-            new AlertDialog.Builder(context).setTitle("Delete").setMessage("do You want to delete " + expenseModels.get(position).getReason()).setPositiveButton("yes", (dialog, which) -> {
-                databaseConnection.deleteFromExpense(expenseModels.get(position).getPrimaryKey());
-                dialog.dismiss();
-                updateAdapter(databaseConnection.getDataFromExpenseTable());
-            }).setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+            new AlertDialog.Builder(context)
+                    .setTitle("Delete")
+                    .setMessage("do You want to delete " + expenseModels.get(position).getReason())
+                    .setPositiveButton("yes", (dialog, which) -> {
+                        databaseConnection.deleteFromExpense(expenseModels.get(position).getPrimaryKey());
+                        dialog.dismiss();
+                        updateAdapter(databaseConnection.getDataFromExpenseTable());
+                    })
+                    .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
                     .show();
             return true;
         });
