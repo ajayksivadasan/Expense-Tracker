@@ -12,10 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:textColor="@color/white"
         android:layout_margin="10dp"
         android:background="@drawable/button_background_homepage"
-        android:text="@string/previous_entries" />
+        android:padding="10dp"
+        android:text="@string/previous_entries"
+        android:textColor="@color/white" />
 
     <Spinner
         android:id="@+id/spEntryType"
@@ -33,7 +34,9 @@
         android:background="@drawable/edit_text_background"
         android:fontFamily="@font/my_raid_pro_regular"
         android:hint="@string/reason"
+        android:imeOptions="actionNext"
         android:inputType="text"
+        android:lines="1"
         android:padding="10dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
@@ -47,6 +50,7 @@
         android:background="@drawable/edit_text_background"
         android:fontFamily="@font/my_raid_pro_regular"
         android:hint="@string/rate"
+        android:imeOptions="actionDone"
         android:inputType="numberSigned|numberDecimal"
         android:padding="10dp"
         android:textColor="@color/black"
@@ -58,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:textColor="@color/white"
         android:background="@drawable/button_background_homepage"
-        android:text="@string/txt_submit" />
+        android:text="@string/txt_submit"
+        android:textColor="@color/white" />
 </LinearLayout>
