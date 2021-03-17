@@ -4,10 +4,11 @@ public class ExpenseModel {
     private int primaryKey;
     private String date;
     private String reason;
-    private Float expense;
-    private float income;
+    private double expense;
+    private double income;
 
     public ExpenseModel() {
+        //something
     }
 
     public String getDate() {
@@ -18,14 +19,6 @@ public class ExpenseModel {
         this.date = date;
     }
 
-    public Float getExpense() {
-        return expense;
-    }
-
-    public void setExpense(Float expense) {
-        this.expense = expense;
-    }
-
     public String getReason() {
         return reason;
     }
@@ -34,19 +27,27 @@ public class ExpenseModel {
         this.reason = reason;
     }
 
-    public float getIncome() {
-        return income;
-    }
-
-    public void setIncome(float income) {
-        this.income = income;
-    }
-
     public int getPrimaryKey() {
         return primaryKey;
     }
 
     public void setPrimaryKey(int primaryKey) {
         this.primaryKey = primaryKey;
+    }
+
+    public double getExpense() {
+        return expense;
+    }
+
+    public void setExpense(double expense) {
+        this.expense = expense;
+    }
+
+    public double getIncome() {
+        return income;
+    }
+
+    public void setIncome(double income) {
+        this.income = income;
     }
 }

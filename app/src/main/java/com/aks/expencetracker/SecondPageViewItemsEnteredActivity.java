@@ -16,16 +16,16 @@ import com.aks.expencetracker.models.ExpenseModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SecondPageViewItemsEnteredActivity extends AppCompatActivity {
+@SuppressLint("SetTextI18n")
+public class SecondPageViewItemsEnteredActivity extends AppCompatActivity implements ExpenseViewAdapter.ExpenseCountInterface {
     List<ExpenseModel> expenseModels = new ArrayList<>();
     Context context;
     DatabaseConnection databaseConnection;
-    TextView tvTotalIncome, tvTotalExpense;
+    TextView tvTotalIncome;
+    TextView tvTotalExpense;
     RecyclerView rvSecondPage;
     ExpenseViewAdapter expenseViewAdapter;
 
-
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,21 +34,20 @@ public class SecondPageViewItemsEnteredActivity extends AppCompatActivity {
         initIds();
         databaseConnection = new DatabaseConnection(context);
         expenseModels = databaseConnection.getDataFromExpenseTable();
-        expenseViewAdapter = new ExpenseViewAdapter(context, expenseModels);
+        expenseViewAdapter = new ExpenseViewAdapter(context, expenseModels, this);
         rvSecondPage.setLayoutManager(new LinearLayoutManager(context));
         rvSecondPage.setAdapter(expenseViewAdapter);
-        float totalIncome = 0.00f, totalExpense = 0.00f;
-        for (int i = 0; i < expenseModels.size(); i++) {
-            totalExpense += expenseModels.get(i).getExpense();
-            totalIncome += expenseModels.get(i).getIncome();
-        }
-        tvTotalExpense.setText(totalExpense + " Rs");
-        tvTotalIncome.setText(totalIncome + " Rs");
     }
 
     private void initIds() {
         rvSecondPage = findViewById(R.id.rvSecondPage);
         tvTotalIncome = findViewById(R.id.tvTotalIncome);
         tvTotalExpense = findViewById(R.id.tvTotalExpense);
+    }
+
+    @Override
+    public void setTotals(double incomeTotal, double expenseTotal) {
+        tvTotalExpense.setText(expenseTotal + "");
+        tvTotalIncome.setText(incomeTotal + "");
     }
 }
