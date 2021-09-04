@@ -1,4 +1,4 @@
-package com.aks.expencetracker.databases;
+package com.aks.expencetracker.repositories.databases;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -8,10 +8,8 @@ import android.util.Log;
 
 import com.aks.expencetracker.models.ExpenseModel;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class DatabaseConnection extends SQLiteOpenHelper {
     private static final String DATABASE = "ExpenseDB.db";

@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.aks.expencetracker.databases.DatabaseConnection;
+import com.aks.expencetracker.repositories.databases.DatabaseConnection;
 import com.aks.expencetracker.models.ExpenseModel;
 
 import java.text.SimpleDateFormat;

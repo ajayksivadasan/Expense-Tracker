@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aks.expencetracker.R;
-import com.aks.expencetracker.databases.DatabaseConnection;
+import com.aks.expencetracker.repositories.databases.DatabaseConnection;
 import com.aks.expencetracker.models.ExpenseModel;
 
 import java.util.List;
