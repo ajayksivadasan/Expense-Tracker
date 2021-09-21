@@ -1,4 +1,4 @@
-package com.aks.expencetracker;
+package com.aks.expencetracker.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,9 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.aks.expencetracker.R;
 import com.aks.expencetracker.adapters.ExpenseViewAdapter;
-import com.aks.expencetracker.repositories.databases.DatabaseConnection;
 import com.aks.expencetracker.models.ExpenseModel;
+import com.aks.expencetracker.repositories.databases.DatabaseConnection;
 
 import java.util.ArrayList;
 import java.util.List;

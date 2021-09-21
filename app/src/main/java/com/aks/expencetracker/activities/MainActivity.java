@@ -1,4 +1,4 @@
-package com.aks.expencetracker;
+package com.aks.expencetracker.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +12,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.aks.expencetracker.repositories.databases.DatabaseConnection;
+import com.aks.expencetracker.R;
 import com.aks.expencetracker.models.ExpenseModel;
+import com.aks.expencetracker.repositories.databases.DatabaseConnection;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
