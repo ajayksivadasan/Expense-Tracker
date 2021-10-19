@@ -1,4 +1,4 @@
-package com.aks.expencetracker.models.database_models;
+package com.aks.expencetracker.repositories.databases;
 
 import static androidx.room.OnConflictStrategy.REPLACE;
 
@@ -6,6 +6,8 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+
+import com.aks.expencetracker.models.database_models.MainData;
 
 import java.util.List;
 
@@ -20,9 +22,9 @@ public interface MainDao {
     @Delete
     void reset(List<MainData> mainData);
 
-    @Query("UPDATE table_name SET text = :sText WHERE ID = :sID")
+    @Query("UPDATE contacts_table SET text = :sText WHERE ID = :sID")
     void update(int sID, String sText);
 
-    @Query("SELECT * FROM table_name")
+    @Query("SELECT * FROM contacts_table")
     List<MainData> getAll();
 }
