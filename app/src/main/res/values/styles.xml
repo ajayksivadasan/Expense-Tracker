@@ -7,4 +7,11 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="fontFamily">@font/my_raid_pro_regular</item>
     </style>
+    <style name="styleTextViewFrom" parent="Widget.AppCompat.TextView">
+        <item name="color">@color/black</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/my_raid_pro_regular</item>
+        <item name="android:fontFamily">@font/my_raid_pro_regular</item>
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>

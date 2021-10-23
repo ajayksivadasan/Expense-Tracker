@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity
-            android:name=".activities.GetContactsFromPhoneActivity"
-            android:exported="true" />
         <activity android:name=".activities.SecondPageViewItemsEnteredActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>

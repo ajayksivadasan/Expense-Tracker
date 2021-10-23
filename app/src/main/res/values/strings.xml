@@ -10,4 +10,6 @@
     <string name="previous_entries">Previous entries</string>
     <string name="reason">Reason</string>
     <string name="txt_income">Income</string>
+    <string name="str_from_dummy_date">from: 10-12-1997</string>
+    <string name="str_to_dummy_date">To: 10-12-1997</string>
 </resources>

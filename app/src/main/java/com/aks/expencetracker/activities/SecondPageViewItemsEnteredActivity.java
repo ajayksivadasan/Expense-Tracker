@@ -1,6 +1,7 @@
 package com.aks.expencetracker.activities;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -15,17 +16,22 @@ import com.aks.expencetracker.models.ExpenseModel;
 import com.aks.expencetracker.repositories.databases.DatabaseConnection;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @SuppressLint("SetTextI18n")
 public class SecondPageViewItemsEnteredActivity extends AppCompatActivity implements ExpenseViewAdapter.ExpenseCountInterface {
-    List<ExpenseModel> expenseModels = new ArrayList<>();
-    Context context;
-    DatabaseConnection databaseConnection;
-    TextView tvTotalIncome;
-    TextView tvTotalExpense;
-    RecyclerView rvSecondPage;
-    ExpenseViewAdapter expenseViewAdapter;
+    private List<ExpenseModel> expenseModels = new ArrayList<>();
+    private Context context;
+    private DatabaseConnection databaseConnection;
+    private TextView tvTotalIncome;
+    private TextView tvFromDate;
+    private TextView tvToDate;
+    private TextView tvTotalExpense;
+    private RecyclerView rvSecondPage;
+    private ExpenseViewAdapter expenseViewAdapter;
+    private Calendar myCalendarFromDate;
+    private Calendar myCalendarToDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +44,48 @@ public class SecondPageViewItemsEnteredActivity extends AppCompatActivity implem
         expenseViewAdapter = new ExpenseViewAdapter(context, expenseModels, this);
         rvSecondPage.setLayoutManager(new LinearLayoutManager(context));
         rvSecondPage.setAdapter(expenseViewAdapter);
+        myCalendarFromDate = Calendar.getInstance();
+        myCalendarToDate = Calendar.getInstance();
+        updateFromDate();
+        updateToDate();
+        DatePickerDialog.OnDateSetListener pickerListener = (view, year, monthOfYear, dayOfMonth) -> {
+            myCalendarFromDate.set(Calendar.YEAR, year);
+            myCalendarFromDate.set(Calendar.MONTH, monthOfYear);
+            myCalendarFromDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateFromDate();
+        };DatePickerDialog.OnDateSetListener pickerListenerTo = (view, year, monthOfYear, dayOfMonth) -> {
+            myCalendarToDate.set(Calendar.YEAR, year);
+            myCalendarToDate.set(Calendar.MONTH, monthOfYear);
+            myCalendarToDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateToDate();
+        };
+        tvFromDate.setOnClickListener(view -> new DatePickerDialog(context, pickerListener,
+                myCalendarFromDate.get(Calendar.YEAR),
+                myCalendarFromDate.get(Calendar.MONTH),
+                myCalendarFromDate.get(Calendar.DAY_OF_MONTH))
+                .show());
+        tvToDate.setOnClickListener(view -> new DatePickerDialog(context, pickerListenerTo,
+                myCalendarFromDate.get(Calendar.YEAR),
+                myCalendarFromDate.get(Calendar.MONTH),
+                myCalendarFromDate.get(Calendar.DAY_OF_MONTH))
+                .show());
+    }
+
+    private void updateToDate() {
+        tvFromDate.setText("From: " + myCalendarFromDate.get(Calendar.DATE) + "-" + (myCalendarFromDate.get(Calendar.MONTH) + 1) + "-" + myCalendarFromDate.get(Calendar.YEAR));
+    }
+
+    private void updateFromDate() {
+        tvToDate.setText("From: " + myCalendarToDate.get(Calendar.DATE) + "-" + (myCalendarToDate.get(Calendar.MONTH) + 1) + "-" + myCalendarToDate.get(Calendar.YEAR));
+
     }
 
     private void initIds() {
         rvSecondPage = findViewById(R.id.rvSecondPage);
         tvTotalIncome = findViewById(R.id.tvTotalIncome);
         tvTotalExpense = findViewById(R.id.tvTotalExpense);
+        tvFromDate = findViewById(R.id.tvFromDate);
+        tvToDate = findViewById(R.id.tvToDate);
     }
 
     @Override
