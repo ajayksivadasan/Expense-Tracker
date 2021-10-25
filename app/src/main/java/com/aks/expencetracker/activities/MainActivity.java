@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         if (dbCon.insertIntoTableExpense(expenseModels)) {
             Toast.makeText(context, "Successfully Inserted", Toast.LENGTH_SHORT).show();
             etItemRate.setText("");
-            etItemRate.setHint(R.string.rate);
+            etItemRate.setHint(R.string.str_price_expense_debit);
             etItemType.setHint(getString(R.string.reason));
             etItemType.setText("");
             etItemType.setFocusable(true);

@@ -49,7 +49,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/edit_text_background"
         android:fontFamily="@font/my_raid_pro_regular"
-        android:hint="@string/rate"
+        android:hint="@string/str_price_expense_debit"
         android:imeOptions="actionDone"
         android:inputType="numberSigned|numberDecimal"
         android:padding="10dp"

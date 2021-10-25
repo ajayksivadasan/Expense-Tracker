@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Expence Tracker</string>
-    <string name="rate">Rate</string>
-    <string name="txt_submit">submit</string>
+    <string name="app_name">Expense Tracker</string>
+    <string name="str_price_expense_debit">Price Credit/Debit</string>
+    <string name="txt_submit">Submit</string>
     <string name="txt_date">Date</string>
     <string name="txt_reason">Reason</string>
     <string name="txt_expense">Expense</string>
@@ -10,6 +10,6 @@
     <string name="previous_entries">Previous entries</string>
     <string name="reason">Reason</string>
     <string name="txt_income">Income</string>
-    <string name="str_from_dummy_date">from: 10-12-1997</string>
-    <string name="str_to_dummy_date">To: 10-12-1997</string>
+    <string name="str_from_dummy_date">from: 10/12/1997</string>
+    <string name="str_to_dummy_date">To: 10/12/1997</string>
 </resources>
