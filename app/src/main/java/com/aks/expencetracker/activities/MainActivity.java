@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -13,7 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aks.expencetracker.R;
-import com.aks.expencetracker.models.ExpenseModel;
+import com.aks.expencetracker.models.database_models.ExpenseTableRoom;
 import com.aks.expencetracker.repositories.databases.DatabaseConnection;
 
 import java.text.SimpleDateFormat;
@@ -40,11 +39,6 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         setContentView(R.layout.activity_main);
         initIds();
-        spinnerArray.add("--Select Type Of Entry--");
-        spinnerArray.add("Income");
-        spinnerArray.add("Expense");
-        ArrayAdapter<? extends String> arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item,spinnerArray);
-        spEntryType.setAdapter(arrayAdapter);
         btSubmit.setOnClickListener(v -> {
             type = etItemType.getText().toString();
             rate = etItemRate.getText().toString();
@@ -57,22 +51,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveData(String type, String rate) {
-        ArrayList<ExpenseModel> expenseModels = new ArrayList<>();
-        ExpenseModel expenseModel = new ExpenseModel();
+        ArrayList<ExpenseTableRoom> expenseTableRooms = new ArrayList<>();
+        ExpenseTableRoom expenseTableRoom = new ExpenseTableRoom();
         Date date = Calendar.getInstance().getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
         try {
-            expenseModel.setDate(sdf.format(date));
-            Log.e("saveData: ", expenseModel.getDate());
+            expenseTableRoom.setDateOfExpense(sdf.format(date));
+            Log.e("saveData: ", expenseTableRoom.getDateOfExpense());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        expenseModel.setExpense(Double.parseDouble(rate));
-        expenseModel.setIncome(0.00f);
-        expenseModel.setReason(type);
-        expenseModels.add(expenseModel);
+        expenseTableRoom.setExpenseAmount(Double.parseDouble(rate));
+        expenseTableRoom.setExpenseIncome(0.00f);
+        expenseTableRoom.setReason(type);
+        expenseTableRooms.add(expenseTableRoom);
         DatabaseConnection dbCon = new DatabaseConnection(this);
-        if (dbCon.insertIntoTableExpense(expenseModels)) {
+        if (dbCon.insertIntoTableExpense(expenseTableRooms)) {
             Toast.makeText(context, "Successfully Inserted", Toast.LENGTH_SHORT).show();
             etItemRate.setText("");
             etItemRate.setHint(R.string.str_price_expense_debit);

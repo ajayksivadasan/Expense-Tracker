@@ -5,64 +5,68 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".activities.MainActivity">
-
-    <Button
-        android:id="@+id/btPreviousEntries"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_margin="10dp"
-        android:background="@drawable/button_background_homepage"
-        android:padding="10dp"
-        android:text="@string/previous_entries"
-        android:textColor="@color/white" />
-
-    <Spinner
-        android:id="@+id/spEntryType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_margin="10dp"
-        android:background="@drawable/edit_text_background" />
+    tools:context=".activities.MainActivity"
+    tools:ignore="NestedWeights">
 
     <EditText
         android:id="@+id/etItemType"
+        style="@style/etStyleCommon"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="10dp"
-        android:background="@drawable/edit_text_background"
-        android:fontFamily="@font/my_raid_pro_regular"
+        android:layout_weight="1"
         android:hint="@string/reason"
         android:imeOptions="actionNext"
         android:inputType="text"
-        android:lines="1"
         android:padding="10dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
         tools:ignore="Autofill" />
 
     <EditText
         android:id="@+id/etItemRate"
+        style="@style/etStyleCommon"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="10dp"
-        android:background="@drawable/edit_text_background"
-        android:fontFamily="@font/my_raid_pro_regular"
+        android:layout_weight="1"
         android:hint="@string/str_price_expense_debit"
         android:imeOptions="actionDone"
         android:inputType="numberSigned|numberDecimal"
         android:padding="10dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
         tools:ignore="Autofill" />
 
     <Button
         android:id="@+id/btSubmit"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="10dp"
+        android:layout_weight="1"
         android:background="@drawable/button_background_homepage"
         android:text="@string/txt_submit"
         android:textColor="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/styleTextViewFrom"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:maxLines="1" />
+
+        <TextView
+            style="@style/styleTextViewFrom"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:maxLines="1" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8" />
 </LinearLayout>

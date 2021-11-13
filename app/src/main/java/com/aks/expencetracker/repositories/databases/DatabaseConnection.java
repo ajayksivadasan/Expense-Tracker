@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.aks.expencetracker.models.ExpenseModel;
+import com.aks.expencetracker.models.database_models.ExpenseTableRoom;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,18 +40,18 @@ public class DatabaseConnection extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_EXPENSE);
     }
 
-    public boolean insertIntoTableExpense(ArrayList<ExpenseModel> expenseModels) {
-        ExpenseModel expenseModels1;
+    public boolean insertIntoTableExpense(ArrayList<ExpenseTableRoom> expenseTableRooms) {
+        ExpenseTableRoom expenseModels1;
         sqLiteDatabase = this.getReadableDatabase();
-        if (!expenseModels.isEmpty()) {
-            for (int i = 0; i < expenseModels.size(); i++) {
-                expenseModels1 = expenseModels.get(i);
+        if (!expenseTableRooms.isEmpty()) {
+            for (int i = 0; i < expenseTableRooms.size(); i++) {
+                expenseModels1 = expenseTableRooms.get(i);
                 cursor = sqLiteDatabase.rawQuery(SELECT_STAR_FROM_EXPENSE_TABLE, null);
                 sqLiteDatabase = this.getWritableDatabase();
                 if (!cursor.moveToFirst()) {
-                    sqLiteDatabase.execSQL("INSERT INTO " + EXPENSE_TABLE + " VALUES (1,'" + expenseModels1.getDate() + "','" + expenseModels1.getReason() + "'," + expenseModels1.getExpense() + ")");
+                    sqLiteDatabase.execSQL("INSERT INTO " + EXPENSE_TABLE + " VALUES (1,'" + expenseModels1.getDateOfExpense() + "','" + expenseModels1.getReason() + "'," + expenseModels1.getExpenseAmount() + ")");
                 } else {
-                    sqLiteDatabase.execSQL("INSERT INTO " + EXPENSE_TABLE + "(" + DATE + "," + REASON + "," + EXPENSE + ") VALUES ('" + expenseModels1.getDate() + "','" + expenseModels1.getReason() + "'," + expenseModels1.getExpense() + ")");
+                    sqLiteDatabase.execSQL("INSERT INTO " + EXPENSE_TABLE + "(" + DATE + "," + REASON + "," + EXPENSE + ") VALUES ('" + expenseModels1.getDateOfExpense() + "','" + expenseModels1.getReason() + "'," + expenseModels1.getExpenseAmount() + ")");
                 }
             }
             return true;
@@ -62,34 +62,34 @@ public class DatabaseConnection extends SQLiteOpenHelper {
 
     public void deleteFromExpense(int slNo) {
         sqLiteDatabase = this.getWritableDatabase();
-        sqLiteDatabase.execSQL("delete from "+EXPENSE_TABLE+" where "+SL_NO+"="+slNo);
+        sqLiteDatabase.execSQL("delete from " + EXPENSE_TABLE + " where " + SL_NO + "=" + slNo);
     }
 
-    public List<ExpenseModel> getDataFromExpenseTable() {
-        List<ExpenseModel> expenseModels = new ArrayList<>();
-        expenseModels.clear();
-        ExpenseModel expenseModel;
+    public List<ExpenseTableRoom> getDataFromExpenseTable() {
+        List<ExpenseTableRoom> expenseTableRooms = new ArrayList<>();
+        expenseTableRooms.clear();
+        ExpenseTableRoom expenseTableRoom;
         sqLiteDatabase = this.getReadableDatabase();
         cursor = sqLiteDatabase.rawQuery(SELECT_STAR_FROM_EXPENSE_TABLE, null);
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyyy/MM/dd", Locale.getDefault());
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
-                    expenseModel = new ExpenseModel();
+                    expenseTableRoom = new ExpenseTableRoom();
                     try {
-                        expenseModel.setPrimaryKey(cursor.getInt(cursor.getColumnIndex(SL_NO)));
-                        expenseModel.setDate(cursor.getString(cursor.getColumnIndex(DATE)));
+                        expenseTableRoom.setPrimaryKey(cursor.getInt(cursor.getColumnIndex(SL_NO)));
+                        expenseTableRoom.setDateOfExpense(cursor.getString(cursor.getColumnIndex(DATE)));
                         Log.e("getDataFromExpense: ", cursor.getString(cursor.getColumnIndex(DATE)));
-                        expenseModel.setReason(cursor.getString(cursor.getColumnIndex(REASON)));
-                        expenseModel.setExpense(cursor.getFloat(cursor.getColumnIndex(EXPENSE)));
-//                        expenseModel.setIncome(cursor.getFloat(cursor.getColumnIndex(INCOME)));
+                        expenseTableRoom.setReason(cursor.getString(cursor.getColumnIndex(REASON)));
+                        expenseTableRoom.setExpenseAmount(cursor.getFloat(cursor.getColumnIndex(EXPENSE)));
+//                        expenseTableRoom.setIncome(cursor.getFloat(cursor.getColumnIndex(INCOME)));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    expenseModels.add(expenseModel);
+                    expenseTableRooms.add(expenseTableRoom);
                 } while (cursor.moveToNext());
             }
         }
-        return expenseModels;
+        return expenseTableRooms;
     }
 }
