@@ -66,7 +66,51 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSelectedDateItems"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".5"
+        android:orientation="horizontal">
+
+        <View
+            style="@style/styleTextViewFrom"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:fontFamily="@font/my_raid_pro_regular"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/styleTextViewFrom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/txt_total"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvTotalIncome"
+            style="@style/styleTextViewFrom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/txt_income"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvTotalExpense"
+            style="@style/styleTextViewFrom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/txt_expense"
+            android:textSize="18sp" />
+    </LinearLayout>
 </LinearLayout>

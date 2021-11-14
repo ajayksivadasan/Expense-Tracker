@@ -33,17 +33,17 @@ public class ExpenseViewAdapter extends RecyclerView.Adapter<ExpenseViewAdapter.
         this.countInterface = countInterface;
     }
 
-    void updateAdapter(List<ExpenseTable> expenseTables) {
-        this.expenseTables = expenseTables;
-        double sumIncome = 0;
-        double expenseTotal = 0;
-        for (ExpenseTable model : expenseTables) {
-            sumIncome += model.getExpenseIncome();
-            expenseTotal += model.getExpenseIncome();
-        }
-        countInterface.setTotals(sumIncome, expenseTotal);
-        notifyDataSetChanged();
-    }
+   public void updateAdapter(List<ExpenseTable> expenseTables) {
+       this.expenseTables = expenseTables;
+       double sumIncome = 0;
+       double expenseTotal = 0;
+       for (ExpenseTable model : expenseTables) {
+           sumIncome += model.getExpenseIncome();
+           expenseTotal += model.getExpenseIncome();
+       }
+       countInterface.setTotals(sumIncome, expenseTotal);
+       notifyDataSetChanged();
+   }
 
     @NonNull
     @Override

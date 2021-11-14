@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -14,6 +14,8 @@
         <item name="fontFamily">@font/my_raid_pro_regular</item>
         <item name="android:fontFamily">@font/my_raid_pro_regular</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontStyle" tools:targetApi="o">italic</item>
     </style>
 
     <style name="etStyleCommon" parent="Widget.AppCompat.EditText">

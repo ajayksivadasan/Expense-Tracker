@@ -5,11 +5,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.aks.expencetracker.R;
+import com.aks.expencetracker.adapters.ExpenseViewAdapter;
 import com.aks.expencetracker.models.database_models.ExpenseTable;
 import com.aks.expencetracker.repositories.databases.DatabaseConnection;
 import com.aks.expencetracker.repositories.databases.RoomDB;
@@ -18,10 +23,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ExpenseViewAdapter.ExpenseCountInterface {
     private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+    private TextView tvTotalIncome;
+    private TextView tvTotalExpense;
+    private ExpenseViewAdapter expenseViewAdapter;
+    private ExpenseViewAdapter.ExpenseCountInterface countInterface;
     private RoomDB roomDBInstance;
     private Context context;
     private EditText etItemType;
@@ -29,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btSubmit;
     private Date date;
     private ExpenseTable expenseTable;
+    private List<ExpenseTable> expenseTableList = new ArrayList<>();
+    private RecyclerView rvSelectedDateItems;
 
     //comments added
     @Override
@@ -36,13 +48,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         context = this;
         setContentView(R.layout.activity_main);
+        countInterface = this;
         initIds();
+        rvSelectedDateItems.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
+        rvSelectedDateItems.setLayoutManager(new LinearLayoutManager(context));
+        rvSelectedDateItems.setAdapter(expenseViewAdapter);
+        refreshUi();
         btSubmit.setOnClickListener(v -> {
             String type = etItemType.getText().toString();
             String rate = etItemRate.getText().toString();
             saveData(type, rate);
             saveDataRoom(type, rate);
+            refreshUi();
         });
+    }
+
+    private void refreshUi() {
+        expenseTableList = roomDBInstance.mainDao().getAllExpense();
+        expenseViewAdapter.updateAdapter(expenseTableList);
     }
 
     private void saveDataRoom(String description, String rate) {
@@ -93,8 +116,18 @@ public class MainActivity extends AppCompatActivity {
         etItemRate = findViewById(R.id.etItemRate);
         etItemType = findViewById(R.id.etItemType);
         btSubmit = findViewById(R.id.btSubmit);
-
+        rvSelectedDateItems = findViewById(R.id.rvSelectedDateItems);
+        tvTotalIncome = findViewById(R.id.tvTotalIncome);
+        tvTotalExpense = findViewById(R.id.tvTotalExpense);
+        //init Adapter
+        expenseViewAdapter = new ExpenseViewAdapter(context, expenseTableList, countInterface);
         // roomDb Instance
         roomDBInstance = RoomDB.getInstance(context);
+    }
+
+    @Override
+    public void setTotals(double incomeTotal, double expenseTotal) {
+        tvTotalIncome.setText(String.valueOf(incomeTotal));
+        tvTotalExpense.setText(String.valueOf(expenseTotal));
     }
 }
