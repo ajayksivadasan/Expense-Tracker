@@ -1,19 +1,18 @@
 package com.aks.expencetracker.activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aks.expencetracker.R;
-import com.aks.expencetracker.models.database_models.ExpenseTableRoom;
+import com.aks.expencetracker.models.database_models.ExpenseTable;
 import com.aks.expencetracker.repositories.databases.DatabaseConnection;
+import com.aks.expencetracker.repositories.databases.RoomDB;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,15 +21,14 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    final ArrayList<String> spinnerArray = new ArrayList<>();
-    String type;
-    String rate;
-    Context context;
+    private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+    private RoomDB roomDBInstance;
+    private Context context;
     private EditText etItemType;
     private EditText etItemRate;
     private Button btSubmit;
-    private Button btPreviousEntries;
-    private Spinner spEntryType;
+    private Date date;
+    private ExpenseTable expenseTable;
 
     //comments added
     @Override
@@ -40,33 +38,44 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initIds();
         btSubmit.setOnClickListener(v -> {
-            type = etItemType.getText().toString();
-            rate = etItemRate.getText().toString();
+            String type = etItemType.getText().toString();
+            String rate = etItemRate.getText().toString();
             saveData(type, rate);
-        });
-        btPreviousEntries.setOnClickListener(v -> {
-            Intent intent = new Intent(context, SecondPageViewItemsEnteredActivity.class);
-            startActivity(intent);
+            saveDataRoom(type, rate);
         });
     }
 
-    private void saveData(String type, String rate) {
-        ArrayList<ExpenseTableRoom> expenseTableRooms = new ArrayList<>();
-        ExpenseTableRoom expenseTableRoom = new ExpenseTableRoom();
-        Date date = Calendar.getInstance().getTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+    private void saveDataRoom(String description, String rate) {
+        date = Calendar.getInstance().getTime();
+        expenseTable = new ExpenseTable();
         try {
-            expenseTableRoom.setDateOfExpense(sdf.format(date));
-            Log.e("saveData: ", expenseTableRoom.getDateOfExpense());
+            expenseTable.setDateOfExpense(sdf.format(date));
+            Log.e("saveData: ", expenseTable.getDateOfExpense());
+        } catch (Exception e) {
+            e.printStackTrace();
+            expenseTable.setDateOfExpense("date unavailable");
+        }
+        expenseTable.setExpenseAmount(Double.parseDouble(rate));
+        expenseTable.setExpenseIncome(0.00f);
+        expenseTable.setReason(description);
+        roomDBInstance.mainDao().insert(expenseTable);
+    }
+
+    private void saveData(String type, String rate) {
+        ArrayList<ExpenseTable> expenseTables = new ArrayList<>();
+        expenseTable = new ExpenseTable();
+        try {
+            expenseTable.setDateOfExpense(sdf.format(date));
+            Log.e("saveData: ", expenseTable.getDateOfExpense());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        expenseTableRoom.setExpenseAmount(Double.parseDouble(rate));
-        expenseTableRoom.setExpenseIncome(0.00f);
-        expenseTableRoom.setReason(type);
-        expenseTableRooms.add(expenseTableRoom);
+        expenseTable.setExpenseAmount(Double.parseDouble(rate));
+        expenseTable.setExpenseIncome(0.00f);
+        expenseTable.setReason(type);
+        expenseTables.add(expenseTable);
         DatabaseConnection dbCon = new DatabaseConnection(this);
-        if (dbCon.insertIntoTableExpense(expenseTableRooms)) {
+        if (dbCon.insertIntoTableExpense(expenseTables)) {
             Toast.makeText(context, "Successfully Inserted", Toast.LENGTH_SHORT).show();
             etItemRate.setText("");
             etItemRate.setHint(R.string.str_price_expense_debit);
@@ -80,10 +89,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initIds() {
-        btPreviousEntries = findViewById(R.id.btPreviousEntries);
+        //initialise ids
         etItemRate = findViewById(R.id.etItemRate);
         etItemType = findViewById(R.id.etItemType);
         btSubmit = findViewById(R.id.btSubmit);
-        spEntryType = findViewById(R.id.spEntryType);
+
+        // roomDb Instance
+        roomDBInstance = RoomDB.getInstance(context);
     }
 }

@@ -9,3 +9,5 @@ P
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 †
 Vapp/src/main/java/com/aks/expencetracker/repositories/retrofit/RetrofitConnection.java,8\f\8f255ea6754d72668d2c98f8b9657934cda35859
+y
+Iapp/src/main/java/com/aks/expencetracker/adapters/ExpenseViewAdapter.java,c\c\cc20e1b810b9d1e788a1801c0a432e37d06a968f

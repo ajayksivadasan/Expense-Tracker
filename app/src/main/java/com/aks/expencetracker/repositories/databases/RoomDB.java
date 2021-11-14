@@ -6,9 +6,9 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.aks.expencetracker.models.database_models.ExpenseTableRoom;
+import com.aks.expencetracker.models.database_models.ExpenseTable;
 
-@Database(entities = {ExpenseTableRoom.class}, version = 2, exportSchema = false)
+@Database(entities = {ExpenseTable.class}, version = 2, exportSchema = false)
 public abstract class RoomDB extends RoomDatabase {
     private static final String DATABASE_NAME = "ExpenseDb";
     private static RoomDB database;
@@ -23,6 +23,6 @@ public abstract class RoomDB extends RoomDatabase {
         return database;
     }
 
-    public abstract MainDao mainDao();
+    public abstract ExpenseTableDao mainDao();
 
 }

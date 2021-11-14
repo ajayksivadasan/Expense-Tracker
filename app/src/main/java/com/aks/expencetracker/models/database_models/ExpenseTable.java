@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "Table_Expense")
-public class ExpenseTableRoom {
+public class ExpenseTable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "Primary_Key")
     private int primaryKey;
@@ -20,7 +20,7 @@ public class ExpenseTableRoom {
     @ColumnInfo(name = "Expense_Income")
     private double expenseIncome;
 
-    public ExpenseTableRoom() {
+    public ExpenseTable() {
         //something
     }
 

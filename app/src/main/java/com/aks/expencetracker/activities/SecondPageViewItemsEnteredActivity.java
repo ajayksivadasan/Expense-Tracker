@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aks.expencetracker.R;
 import com.aks.expencetracker.adapters.ExpenseViewAdapter;
-import com.aks.expencetracker.models.database_models.ExpenseTableRoom;
+import com.aks.expencetracker.models.database_models.ExpenseTable;
 import com.aks.expencetracker.repositories.databases.DatabaseConnection;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import java.util.List;
 
 @SuppressLint("SetTextI18n")
 public class SecondPageViewItemsEnteredActivity extends AppCompatActivity implements ExpenseViewAdapter.ExpenseCountInterface {
-    private List<ExpenseTableRoom> expenseTableRooms = new ArrayList<>();
+    private List<ExpenseTable> expenseTables = new ArrayList<>();
     private Context context;
     private DatabaseConnection databaseConnection;
     private TextView tvTotalIncome;
@@ -40,8 +40,8 @@ public class SecondPageViewItemsEnteredActivity extends AppCompatActivity implem
         setContentView(R.layout.activity_second_page_view_items_entered);
         initIds();
         databaseConnection = new DatabaseConnection(context);
-        expenseTableRooms = databaseConnection.getDataFromExpenseTable();
-        expenseViewAdapter = new ExpenseViewAdapter(context, expenseTableRooms, this);
+        expenseTables = databaseConnection.getDataFromExpenseTable();
+        expenseViewAdapter = new ExpenseViewAdapter(context, expenseTables, this);
         rvSecondPage.setLayoutManager(new LinearLayoutManager(context));
         rvSecondPage.setAdapter(expenseViewAdapter);
         myCalendarFromDate = Calendar.getInstance();
