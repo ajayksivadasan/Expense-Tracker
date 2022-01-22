@@ -1,4 +1,4 @@
-package com.aks.expencetracker.activities;
+package com.aks.expencetracker.ui.main;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,10 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aks.expencetracker.R;
-import com.aks.expencetracker.adapters.ExpenseViewAdapter;
-import com.aks.expencetracker.models.database_models.ExpenseTable;
-import com.aks.expencetracker.repositories.databases.DatabaseConnection;
-import com.aks.expencetracker.repositories.databases.RoomDB;
+import com.aks.expencetracker.data.database_models.ExpenseTable;
+import com.aks.expencetracker.utils.databases.DatabaseConnection;
+import com.aks.expencetracker.utils.databases.RoomDB;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements ExpenseViewAdapte
             String rate = etItemRate.getText().toString();
             saveData(type, rate);
             saveDataRoom(type, rate);
-            refreshUi();
         });
     }
 
@@ -82,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements ExpenseViewAdapte
         expenseTable.setExpenseIncome(0.00f);
         expenseTable.setReason(description);
         roomDBInstance.mainDao().insert(expenseTable);
+        refreshUi();
     }
 
     private void saveData(String type, String rate) {

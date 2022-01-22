@@ -1,4 +1,4 @@
-package com.aks.expencetracker.repositories.databases;
+package com.aks.expencetracker.utils.databases;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.aks.expencetracker.models.database_models.ExpenseTable;
+import com.aks.expencetracker.data.database_models.ExpenseTable;
 
 import java.util.ArrayList;
 import java.util.List;

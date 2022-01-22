@@ -1,4 +1,4 @@
-package com.aks.expencetracker.models.database_models;
+package com.aks.expencetracker.data.database_models;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

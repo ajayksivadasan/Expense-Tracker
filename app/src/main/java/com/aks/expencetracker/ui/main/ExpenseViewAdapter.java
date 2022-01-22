@@ -1,4 +1,4 @@
-package com.aks.expencetracker.adapters;
+package com.aks.expencetracker.ui.main;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -14,8 +14,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aks.expencetracker.R;
-import com.aks.expencetracker.models.database_models.ExpenseTable;
-import com.aks.expencetracker.repositories.databases.DatabaseConnection;
+import com.aks.expencetracker.data.database_models.ExpenseTable;
+import com.aks.expencetracker.utils.databases.DatabaseConnection;
 
 import java.util.List;
 

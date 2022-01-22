@@ -1,4 +1,4 @@
-package com.aks.expencetracker.repositories.databases;
+package com.aks.expencetracker.utils.databases;
 
 import android.content.Context;
 
@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.aks.expencetracker.models.database_models.ExpenseTable;
+import com.aks.expencetracker.data.database_models.ExpenseTable;
 
 @Database(entities = {ExpenseTable.class}, version = 2, exportSchema = false)
 public abstract class RoomDB extends RoomDatabase {

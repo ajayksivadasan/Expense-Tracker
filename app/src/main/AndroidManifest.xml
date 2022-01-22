@@ -4,6 +4,7 @@
     package="com.aks.expencetracker">
 
     <application
+        android:name=".ExpenseApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/ic_expenses"
@@ -12,8 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".activities.SecondPageViewItemsEnteredActivity" />
-        <activity android:name=".activities.MainActivity">
+        <activity
+            android:name=".ui.second.SecondPageViewItemsEnteredActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

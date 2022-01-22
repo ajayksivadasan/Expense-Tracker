@@ -1,4 +1,4 @@
-package com.aks.expencetracker.activities;
+package com.aks.expencetracker.ui.second;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aks.expencetracker.R;
-import com.aks.expencetracker.adapters.ExpenseViewAdapter;
-import com.aks.expencetracker.models.database_models.ExpenseTable;
-import com.aks.expencetracker.repositories.databases.DatabaseConnection;
+import com.aks.expencetracker.data.database_models.ExpenseTable;
+import com.aks.expencetracker.ui.main.ExpenseViewAdapter;
+import com.aks.expencetracker.utils.databases.DatabaseConnection;
 
 import java.util.ArrayList;
 import java.util.Calendar;

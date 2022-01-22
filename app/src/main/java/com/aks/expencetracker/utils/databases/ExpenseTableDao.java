@@ -1,4 +1,4 @@
-package com.aks.expencetracker.repositories.databases;
+package com.aks.expencetracker.utils.databases;
 
 import static androidx.room.OnConflictStrategy.REPLACE;
 
@@ -7,9 +7,8 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.aks.expencetracker.models.database_models.ExpenseTable;
+import com.aks.expencetracker.data.database_models.ExpenseTable;
 
-import java.util.Date;
 import java.util.List;
 
 @Dao
@@ -28,10 +27,4 @@ public interface ExpenseTableDao {
 
     @Query("SELECT * FROM Table_Expense")
     List<ExpenseTable> getAllExpense();
-
-    @Query("select * from Table_Expense where Date_Of_Expense = :beforeDate ")
-    List<ExpenseTable> getAllFromDate(Date beforeDate);
-
-    @Query("select * from Table_Expense where Date_Of_Expense between :beforeDate and :afterDate")
-    List<ExpenseTable> getAllFromDateRange(Date beforeDate, Date afterDate);
 }
